@@ -1,26 +1,63 @@
-console.log("Try npm run lint/fix!");
+#!/usr/bin/env node
 
-const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
+import * as chokidar from 'chokidar';
+import log from './log';
+import {defaultConfig, Config} from './config';
+import {syncIniFiles} from './ini-sync';
+import path = require('path');
+import {program} from 'commander';
 
-const trailing = 'Semicolon'
+function parseCommandline(): Config {
+  const applicationConfig: Config = defaultConfig;
+  const options: {target: string; watch: string; deleteWatchedFile: boolean} =
+    program
+      .option(
+        '-w, --watch <pattern>',
+        'Path pattern to watch for new ini files, such as /Users/user/Downloads/aws_sts*.txt',
+        path.join(applicationConfig.watchPath, applicationConfig.watchPattern),
+      )
+      .option(
+        '-t, --target <path>',
+        'File path of target ini file.',
+        defaultConfig.credentialsPath,
+      )
+      .option(
+        '--no-delete-watched-file',
+        'Keep watched files after processing.',
+      )
+      .version(require('../package.json').version)
+      .parse()
+      .opts();
 
-			const why={am:'I tabbed?'};
-
-const iWish = "I didn't have a trailing space..."; 
-
-const sicilian = true;;
-
-const vizzini = (!!sicilian) ? !!!sicilian : sicilian;
-
-const re = /foo   bar/;
-
-export function doSomeStuff(withThis: string, andThat: string, andThose: string[]) {
-    //function on one line
-    if(!Boolean(andThose.length)) {return false;}
-    console.log(withThis);
-    console.log(andThat);
-    console.dir(andThose);
-    console.log(longString, trailing, why, iWish, vizzini, re);
-    return;
+  log.info(`Using the following configuration: ${JSON.stringify(options)}`);
+  return {
+    credentialsPath: options.target,
+    watchPath: path.dirname(options.watch),
+    watchPattern: path.basename(options.watch),
+    keepWatchedFile: !options.deleteWatchedFile,
+  };
 }
-// TODO: more examples
+const applicationConfig = parseCommandline();
+log.info(
+  `Using the following configuration: ${JSON.stringify(applicationConfig)}`,
+);
+
+const patternToWatch = path.join(
+  applicationConfig.watchPath,
+  applicationConfig.watchPattern,
+);
+log.info(`Watching for files matching pattern: ${patternToWatch}`);
+
+const watcher = chokidar.watch(patternToWatch, {ignoreInitial: true});
+
+watcher.on('add', path => {
+  log.info(
+    `A new matching file has been detected at path: ${path}. Syncing...`,
+  );
+  syncIniFiles(
+    path,
+    applicationConfig.credentialsPath,
+    applicationConfig.keepWatchedFile,
+  );
+  log.info('Syncing complete.');
+});
