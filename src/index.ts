@@ -25,7 +25,7 @@ function parseCommandline(): Config {
         '--no-delete-watched-file',
         'Keep watched files after processing.',
       )
-      .version(require('../package.json').version)
+      .version(require('./version').LIB_VERSION)
       .parse()
       .opts();
 
