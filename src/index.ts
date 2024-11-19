@@ -38,7 +38,7 @@ function parseCommandline(): Config {
   };
 }
 const applicationConfig = parseCommandline();
-log.info(
+log.debug(
   `Using the following configuration: ${JSON.stringify(applicationConfig)}`,
 );
 
