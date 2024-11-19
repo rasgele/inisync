@@ -56,5 +56,8 @@
   "bugs": {
     "url": "https://github.com/vozzen/inisync/issues"
   },
-  "homepage": "https://github.com/vozzen/inisync#readme"
+  "homepage": "https://github.com/vozzen/inisync#readme",
+  "publishConfig": {
+     "access": "public"
+   }
 }
