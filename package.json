@@ -50,11 +50,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rasgele/inisync.git"
+    "url": "git+https://github.com/vozzen/inisync.git"
   },
   "author": "Volkan Sen",
   "bugs": {
-    "url": "https://github.com/rasgele/inisync/issues"
+    "url": "https://github.com/vozzen/inisync/issues"
   },
-  "homepage": "https://github.com/rasgele/inisync#readme"
+  "homepage": "https://github.com/vozzen/inisync#readme"
 }
