@@ -1,1 +1,0 @@
-{"version":3,"file":"osUtils.js","sourceRoot":"","sources":["../../src/osUtils.ts"],"names":[],"mappings":";;;AAAA,yBAAyB;AAOZ,QAAA,WAAW,GAAgB;IACtC,kBAAkB,EAAE,EAAE,CAAC,OAAO,EAAE,GAAG,mBAAmB;IACtD,iBAAiB,EAAE,EAAE,CAAC,OAAO,EAAE,GAAG,YAAY;CAC/C,CAAC"}
