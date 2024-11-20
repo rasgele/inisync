@@ -1,4 +1,5 @@
 import * as os from 'os';
+import path = require('path');
 
 interface OSConstants {
   readonly downloadDirectory: string;
@@ -6,6 +7,6 @@ interface OSConstants {
 }
 
 export const osConstants: OSConstants = {
-  awsCredentialsPath: os.homedir() + '/.aws/credentials',
-  downloadDirectory: os.homedir() + '/Downloads',
+  awsCredentialsPath: path.join(os.homedir(), '.aws', 'credentials'),
+  downloadDirectory: path.join(os.homedir(), 'Downloads'),
 };

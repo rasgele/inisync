@@ -54,10 +54,14 @@ watcher.on('add', path => {
   log.info(
     `A new matching file has been detected at path: ${path}. Syncing...`,
   );
-  syncIniFiles(
-    path,
-    applicationConfig.credentialsPath,
-    applicationConfig.keepWatchedFile,
-  );
-  log.info('Syncing complete.');
+  try {
+    syncIniFiles(
+      path,
+      applicationConfig.credentialsPath,
+      applicationConfig.keepWatchedFile,
+    );
+    log.info('Syncing complete.');
+  } catch (e) {
+    log.error(`Error syncing file: ${e}`);
+  }
 });

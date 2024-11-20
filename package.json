@@ -7,6 +7,9 @@
   "files": [
     "build/src"
   ],
+  "engines": {
+    "node": ">=14.14.0"
+  },
   "license": "MIT",
   "keywords": [
     "ini",

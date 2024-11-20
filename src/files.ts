@@ -16,3 +16,9 @@ export const backupFile = (path: string): string => {
 export const createFile = (path: string, content: string) => {
   fs.writeFileSync(path, content);
 };
+
+export const createIfNotExists = (path: string) => {
+  if (!fs.existsSync(path)) {
+    createFile(path, '');
+  }
+};

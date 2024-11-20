@@ -1,5 +1,11 @@
 import {stringify, parse} from 'ini';
-import {backupFile, createFile, readFileSync, removeFile} from './files';
+import {
+  backupFile,
+  createFile,
+  readFileSync,
+  removeFile,
+  createIfNotExists,
+} from './files';
 import log from './log';
 
 export const syncIniContents = (
@@ -32,6 +38,7 @@ export const syncIniFiles = (
   oldConfigPath: string,
   keepWatchedFile: boolean,
 ) => {
+  createIfNotExists(oldConfigPath);
   const newContent = readFileSync(newConfigPath);
   const oldContent = readFileSync(oldConfigPath);
 

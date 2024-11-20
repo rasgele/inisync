@@ -10,6 +10,6 @@ export interface Config {
 export const defaultConfig: Config = {
   credentialsPath: osConstants.awsCredentialsPath,
   watchPath: osConstants.downloadDirectory,
-  watchPattern: 'aws_sts*',
+  watchPattern: 'aws_sts*.txt',
   keepWatchedFile: false,
 };
