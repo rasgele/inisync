@@ -46,7 +46,6 @@ const patternToWatch = path.join(
   applicationConfig.watchPath,
   applicationConfig.watchPattern,
 );
-log.info(`Watching for files matching pattern: ${patternToWatch}`);
 
 const watcher = chokidar.watch(patternToWatch, {ignoreInitial: true});
 
